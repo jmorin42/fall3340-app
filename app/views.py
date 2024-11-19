@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
@@ -65,6 +65,38 @@ def dashboard(request):
     tasks = Task.objects.all().order_by("-created_at")
     return render(request, 'dashboard.html', {'tasks':tasks, "form":form})
 
+@login_required
 def my_tasks(request):
     tasks = Task.objects.filter(user=request.user).order_by("-created_at")
     return render(request, 'my_tasks.html', {'tasks':tasks})
+
+@login_required
+def delete_task(request, pk):
+    task = get_object_or_404(Task, id=pk)
+
+    if request.user.username == task.user.username:
+        task.delete()
+        messages.success(request, "Task has been removed")
+        return redirect('my-tasks')
+    messages.success(request, "You don't have the proper permissions to remove that task")
+    return redirect('dashboard')
+
+@login_required
+def edit_task(request, pk):
+    task = get_object_or_404(Task, id=pk)
+
+    if request.user.username == task.user.username:
+        form = TaskForm(request.POST or None, instance=task)
+
+        if request.method == "POST":
+            if form.is_valid():
+                task = form.save(commit=False)
+                task.user = request.user
+                task.save()
+                messages.success(request, "Task has been updated!")
+                return redirect('my-tasks')
+        else:
+            return render(request, 'edit_task.html', {'task':task, 'form':form})
+
+    messages.success(request, "You don't have the proper permissions to edit that task")
+    return redirect('dashboard')
