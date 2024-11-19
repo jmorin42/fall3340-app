@@ -3,8 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .forms import SignUpForm
+from .forms import SignUpForm, TaskForm
 from .models import Task
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'home.html', {})
@@ -49,7 +50,21 @@ def register_user(request):
 
     return render(request, 'register.html', {'form':form})
 
+@login_required
 def dashboard(request):
-    tasks = Task.objects.all().order_by("-created_at")
+    form = TaskForm(request.POST or None)
 
-    return render(request, 'dashboard.html', {'tasks':tasks})
+    if request.method == "POST":
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
+            messages.success(request, "Task has been added!")
+            return redirect('dashboard')
+
+    tasks = Task.objects.all().order_by("-created_at")
+    return render(request, 'dashboard.html', {'tasks':tasks, "form":form})
+
+def my_tasks(request):
+    tasks = Task.objects.filter(user=request.user).order_by("-created_at")
+    return render(request, 'my_tasks.html', {'tasks':tasks})

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container text-center">
+    <h1>My Tasks</h1></br>
+    <div class="container">
+        {% for task in tasks %}
+            <div class="alert alert-primary" role="alert">
+                {{ task.body }}</br>
+                <small class="text-muted">
+                    {{ task.created_at }} by {{ task.user.username }}
+                </small>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
