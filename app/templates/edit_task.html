@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container text-center">
+    <h1>Edit Task</h1></br>
+    <div class="row">
+        <div class="col">
+                <div class="alert alert-primary" role="alert">
+                    {{ task.body }}</br>
+                    <small class="text-muted">
+                        {{ task.created_at }} by {{ task.user.username }}
+                    </small>
+                </div>
+                
+            {% if form %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                
+                <button type="submit" class="btn btn-secondary">Submit</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
