@@ -31,8 +31,9 @@ class SignUpForm(UserCreationForm):
 		self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
 
 class TaskForm(forms.ModelForm):
-	body = forms.CharField(required=True, widget=forms.widgets.Textarea(attrs={"placeholder": "Type here...", "class": "form-control"}), label="")
+	title = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "Title", "class": "form-control"}), label="")
+	body = forms.CharField(required=True, widget=forms.widgets.Textarea(attrs={"placeholder": "Description", "class": "form-control"}), label="")
 
 	class Meta:
 		model = Task
-		exclude = ("user",)
+		exclude = ("user", "status")
