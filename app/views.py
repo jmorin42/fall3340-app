@@ -8,7 +8,10 @@ from .models import Task
 from django.contrib.auth.decorators import login_required
 
 def home(request):
-    return render(request, 'home.html', {})
+    if not request.user.is_authenticated:
+        return render(request, 'home.html', {})
+    else:
+        return redirect('dashboard')
 
 def login_user(request):
     if request.method == 'POST':
@@ -20,7 +23,7 @@ def login_user(request):
             login(request, user)
             return redirect('dashboard')
         else:
-            messages.success(request, "Invalid Username or Password")
+            messages.warning(request, "Invalid Username or Password")
             return redirect('login')
     else:
         return render(request, 'login.html', {})
@@ -62,8 +65,13 @@ def dashboard(request):
             messages.success(request, "Task has been added!")
             return redirect('dashboard')
 
-    tasks = Task.objects.all().order_by("-created_at")
-    return render(request, 'dashboard.html', {'tasks':tasks, "form":form})
+    tasks = Task.objects.filter(user=request.user).order_by("-created_at")
+    context = {
+        'tasks': tasks,
+        'form': form
+    }
+    
+    return render(request, 'dashboard.html', context)
 
 @login_required
 def my_tasks(request):
@@ -77,26 +85,35 @@ def delete_task(request, pk):
     if request.user.username == task.user.username:
         task.delete()
         messages.success(request, "Task has been removed")
-        return redirect('my-tasks')
-    messages.success(request, "You don't have the proper permissions to remove that task")
+        return redirect('dashboard')
+    messages.warning(request, "You don't have the proper permissions to remove that task")
     return redirect('dashboard')
 
 @login_required
 def edit_task(request, pk):
     task = get_object_or_404(Task, id=pk)
 
-    if request.user.username == task.user.username:
+    if request.user.username != task.user.username:
+        messages.error(request, "You don't have the proper permissions to edit that task")
+        return redirect('dashboard')
+
+    if request.method == "POST":
         form = TaskForm(request.POST or None, instance=task)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
+            messages.success(request, "Task has been updated!")
+            return redirect('dashboard')
+    return redirect('dashboard')
 
-        if request.method == "POST":
-            if form.is_valid():
-                task = form.save(commit=False)
-                task.user = request.user
-                task.save()
-                messages.success(request, "Task has been updated!")
-                return redirect('my-tasks')
-        else:
-            return render(request, 'edit_task.html', {'task':task, 'form':form})
+@login_required
+def update_status(request, pk):
+    if request.method == 'POST':
+        task = get_object_or_404(Task, id=pk, user=request.user)
+        new_status = request.POST.get('status')
 
-    messages.success(request, "You don't have the proper permissions to edit that task")
+        if new_status in [Task.STATUS_NOT_STARTED, Task.STATUS_IN_PROGRESS, Task.STATUS_COMPLETED]:
+            task.status = new_status
+            task.save()
     return redirect('dashboard')
