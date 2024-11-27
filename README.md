@@ -29,9 +29,11 @@
 
 7) create superuser: python manage.py createsuperuser
 
-8) migrate files: python manage.py migrate
+8) migrate files: python manage.py makemigrations
 
-9) run server: python manage.py runserver
+   followed by: python manage.py migrate
+
+10) run server: python manage.py runserver
 
 Access the admin interface at https://localhost:8000/admin
 using the superuser credentials
