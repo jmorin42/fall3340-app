@@ -1,5 +1,5 @@
 .env
 virt/
-app/__pycache__
-app/migrations
-todoapp/__pycache__
+app/__pycache__/
+todoapp/__pycache__/
+app/migrations/
