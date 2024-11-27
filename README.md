@@ -16,6 +16,7 @@
 	- pip install MySQL
 	- pip install mysql-connector-python
 	- pip install mysqlclient
+	- pip install django-decouple (for .env file and safety)
 
 5) cd into project file: cd fall3340-app
    
