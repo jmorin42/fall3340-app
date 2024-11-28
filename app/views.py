@@ -13,6 +13,9 @@ def home(request):
     else:
         return redirect('dashboard')
 
+def contact_us(request):
+    return render(request, 'contact_us.html') 
+
 def login_user(request):
     if request.method == 'POST':
         username = request.POST['username']
