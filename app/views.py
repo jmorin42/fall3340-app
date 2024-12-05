@@ -9,7 +9,19 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
     if not request.user.is_authenticated:
-        return render(request, 'home.html', {})
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('dashboard')
+            else:
+                messages.warning(request, "Invalid Username or Password")
+                return redirect('home')
+        else:
+            return render(request, 'home.html', {})
     else:
         return redirect('dashboard')
 
@@ -117,3 +129,9 @@ def update_status(request, pk):
             task.status = new_status
             task.save()
     return redirect('dashboard')
+
+def about_page(request):
+    return render(request, 'about.html', {})
+
+def contact_us(request):
+    return render(request, 'contact_us.html', {})

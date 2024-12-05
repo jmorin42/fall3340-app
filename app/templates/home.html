@@ -1,6 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Home</h1>
+{% load static %}
+
+<div class="row" style="height: 95vh;">
+    <div class="col d-flex justify-content-center align-items-center" style="background: #c1dcf9;">
+        <div class="row">
+            <div class="col">
+                <img src="{% static 'app/logo.png' %}" class="img-fluid" width="440" height="440">
+            </div>
+            <div class="col d-flex justify-content-center align-items-center">
+                <div class="text-center">
+                    <h1 style="color: white;">AssignMate</h1>
+                    <h5 style="color: gray; font-style: italic;">Productivity Made Simple</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center align-items-center" style="background: #ffffff">
+        <div class="container-md">
+            <br/>
+            <h3>Sign In</h3>
+            <hr/>
+            <form method="POST" action="{% url 'home' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" required>
+                    <div class="form-text">Don't have an account? <a class="link" href="{% url 'register' %}">Register now!</a></div>
+                </div>
+                <button type="submit" class="btn btn-success">Login</button>
+            </form>
+            <br/>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

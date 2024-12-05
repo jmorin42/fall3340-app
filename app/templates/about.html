@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+
+<br/><br/><br/><br/><br/>
+<div class="container d-flex justify-content-center align-items-center" style="width: 1175px; background-color: #c1dcf9">
+<div class="task-container rounded-3 p-3" style="background-color: #eceeef">
+<div class="container">
+    <h3>Get To Know Our App!</h3>
+    &nbsp;
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">About AssignMate...</h5>
+          <p class="card-text">AssignMate is a user-friendly to-do app designed to help individuals stay organized and boost productivity. With AssignMate, users can easily create, edit, and delete tasks, while also managing their progress by updating the status of each task. The app's simple and intuitive interface makes task management effortless, allowing users to focus on what matters most and stay on top of their goals. Whether you're tackling daily tasks or long-term projects, AssignMate is here to help you get things done efficiently and effectively.</p>
+          <a href="{% url 'register' %}" class="btn btn-primary">Join Today!</a>
+        </div>
+    </div>
+    <br/>
+    <h3>Meet The Developers</h3>
+    &nbsp;
+    <div class="row justify-content-center g-4">
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <img src="{% static 'app/profile.png' %}" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">Jacob Morin</h5>
+                  <p class="card-text">Lead Developer / Scrum Master</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <img src="{% static 'app/profile.png' %}" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">Ayleen Jimenez</h5>
+                  <p class="card-text">Product Manager / Designer</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <img src="{% static 'app/profile.png' %}" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">Christopher Lopez</h5>
+                  <p class="card-text">Tester / Documenter</p>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+</div>
+</div>
+
+
+{% endblock %}

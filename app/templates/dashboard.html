@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container">
+<br/>
+<div class="container" style="background-color: #c1dcf9">
+<div class="task-container rounded-3 p-3" style="background-color: #eceeef">
+    <div class="row">
+        <h1>Hello, {{ user.first_name }}! <span class="wave">👋</span></h1>
+    </div>
+    <hr/>
+    <br/>
     <div class="row">
         <div class="col-8">
-            <h3>To-Do</h3></br>
-            <div class="task-container" style="height: 450px; overflow-y: auto; padding-right: 10px;">
+            <h3>To-Do <span class="wave">📝</span></h3></br>
+            <div class="task-container" style="height: 355px; overflow-y: auto; padding-right: 10px;">
             {% for task in tasks %}
             {% if task.status != 'completed' %}
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="card-header d-flex justify-content-between align-items-center" style="font-size: 20px; font-weight: bold;">
                   {{ task.title }}
                   <div class="btn-group">
                     {% if task.status == 'not_started' %}
@@ -47,12 +54,12 @@
                 </div>
                 <div class="card-body">
                   <blockquote class="blockquote mb-0">
-                    <p>{{ task.body }}</p>
+                    <p style="font-size: 18px;">{{ task.body }}</p>
                   </blockquote>
                 </div>
                 <div class="card-footer d-flex justify-content-between align-items-center text-body-secondary">
                     <div>
-                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTask-{{ task.id }}" role="button" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                    <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editTask-{{ task.id }}" role="button" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
@@ -99,12 +106,12 @@
         </div>
     </br>
     <hr/>
-        <h3>Completed</h3></br>
-            <div class="task-container" style="height: 450px; overflow-y: auto; padding-right: 10px;">
+        <h3>Completed <span class="wave">✅</span></h3></br>
+            <div class="task-container" style="height: 355px; overflow-y: auto; padding-right: 10px;">
             {% for task in tasks %}
             {% if task.status == 'completed' %}
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="card-header d-flex justify-content-between align-items-center" style="font-size: 20px; font-weight: bold;">
                   {{ task.title }}
                   <div class="btn-group">
                     <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">
@@ -137,7 +144,7 @@
                 </div>
                 <div class="card-body">
                   <blockquote class="blockquote mb-0">
-                    <p>{{ task.body }}</p>
+                    <p style="font-size: 18px;">{{ task.body }}</p>
                   </blockquote>
                 </div>
                 <div class="card-footer d-flex justify-content-between align-items-center text-body-secondary">
@@ -156,7 +163,7 @@
         </div>
         </div>
         <div class="col-4">
-            <h3>Create</h3></br>
+            <h3>Create <span class="wave">✍</span></h3></br>
             {% if form %}
             <form method="POST">
                 {% csrf_token %}
@@ -167,6 +174,7 @@
             {% endif %}
         </div>
     </div>
+</div>
 </div>
 
 {% endblock %}

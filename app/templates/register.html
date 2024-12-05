@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="col-md-6 offset-md-3">
-    <h3>Register</h3>
+<br/><br/><br/><br/><br/><br/><br/>
+<div class="container d-flex justify-content-center align-items-center" style="width: 800px; background-color: #c1dcf9">
+<div class="task-container rounded-3 p-3" style="background-color: #eceeef">
+<div class="col">
     <br/>
+    <h3>Register New Account</h3>
+    <hr/>
     <form method="POST" action="">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    <br/>
+</div>
+</div>
 </div>
 
 {% endblock %}
