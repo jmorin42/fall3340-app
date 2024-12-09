@@ -10,12 +10,12 @@
     <h3>Get To Know Our App!</h3>
     &nbsp;
     <div class="card">
-        <div class="card-header">
-        </div>
         <div class="card-body">
           <h5 class="card-title">About AssignMate...</h5>
           <p class="card-text">AssignMate is a user-friendly to-do app designed to help individuals stay organized and boost productivity. With AssignMate, users can easily create, edit, and delete tasks, while also managing their progress by updating the status of each task. The app's simple and intuitive interface makes task management effortless, allowing users to focus on what matters most and stay on top of their goals. Whether you're tackling daily tasks or long-term projects, AssignMate is here to help you get things done efficiently and effectively.</p>
+          {% if not user.is_authenticated %}
           <a href="{% url 'register' %}" class="btn btn-primary">Join Today!</a>
+          {% endif %}
         </div>
     </div>
     <br/>
