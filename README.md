@@ -18,23 +18,39 @@
 	- pip install mysqlclient
 	- pip install django-decouple (for .env file and safety)
 
-5) cd into project file: cd fall3340-app
+ 	** for macOS users ONLY:
+   	- pip install pymysql
+
+6) cd into project file: cd fall3340-app
    
    ** to access your local mysql server you will have to update
    the *settings.py* and *mydb.py* files to change the user and
    password if they're not the same as mine
 
-6) create database in local mysql server (if you don't already have one created): python mydb.py
+7) Add and edit *.env* file: touch .env
+
+   - copy and paste the provided secret key into .env (may have to use an IDE like PyCharm, Sublime Text, etc.)
+
+   ** also don't forget to update the user/password or any other variable to be accurate to your local MySQL server credentials
+
+9) create database in local mysql server (if you don't already have one created): python mydb.py
 
    ** if you get an error here you probably already have a database by that name
 
-7) create superuser: python manage.py createsuperuser
+10) create superuser: python manage.py createsuperuser
 
-8) migrate files: python manage.py makemigrations
+   	** for macOS users ONLY:
+   	- Go into *\_\_init\_\_.py* in the *todoapp* directory and add these lines into the code:
+   	  
+   	  import pymysql
+   	  
+	  pymysql.install_as_MySQLdb()
 
-   followed by: python manage.py migrate
+11) migrate files: python manage.py makemigrations
 
-10) run server: python manage.py runserver
+    followed by: python manage.py migrate
+
+12) run server: python manage.py runserver
 
 Access the admin interface at https://localhost:8000/admin
 using the superuser credentials
