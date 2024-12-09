@@ -1,5 +1,7 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
+from django.urls import reverse_lazy
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -13,4 +15,7 @@ urlpatterns = [
     path('delete-task/<int:pk>', views.delete_task, name='delete-task'),
     path('edit-task/<int:pk>', views.edit_task, name='edit-task'),
     path('update-status/<int:pk>', views.update_status, name='update-status'),
+    path('profile', views.profile_view, name='profile'),
+    # Path to change password
+    path('profile/change_password/', views.change_password, name='change_password'),
 ]

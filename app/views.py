@@ -6,6 +6,8 @@ from django import forms
 from .forms import SignUpForm, TaskForm
 from .models import Task
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 def home(request):
     if not request.user.is_authenticated:
@@ -135,3 +137,29 @@ def about_page(request):
 
 def contact_us(request):
     return render(request, 'contact_us.html', {})
+
+def profile_view(request):
+    return render(request, 'profile.html', {
+        'username': request.user.username,
+        'email': request.user.email,
+    })
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        
+        if form.is_valid():
+            # Save the new password and update session
+            form.save()
+            update_session_auth_hash(request, form.user)  # Keep the user logged in after password change
+            messages.success(request, "Your password has been successfully updated.")
+            return redirect('profile')  # Redirect to the profile page
+        else:
+            # If form is invalid, display error message
+            messages.error(request, "Your new password doesn't meet the required guidelines.")
+    
+    else:
+        form = PasswordChangeForm(user=request.user)
+    
+    return render(request, 'change_password.html', {'form': form})
