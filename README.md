@@ -6,38 +6,47 @@
 
 1) git clone https://github.com/jmorin42/fall3340-app.git
 
+
 2) create virtual environment: python -m venv virt
 
+   ** for macOS all commands containing *python* should use *python3* instead
+
+
 3) activate environment: source virt/Scripts/activate
+
+   ** for macOS: source virt/bin/activate
+
 
 4) install django and mysql:
 
 	- pip install django
-	- pip install MySQL
+	- pip install MySQL (macOS users ignore)
 	- pip install mysql-connector-python
 	- pip install mysqlclient
 	- pip install django-decouple (for .env file and safety)
 
  	** for macOS users ONLY:
+   	[Brew](https://brew.sh/) is needed in order to correctly install mysql
+   	- brew install mysql
    	- pip install pymysql
 
-6) cd into project file: cd fall3340-app
-   
-   ** to access your local mysql server you will have to update
-   the *settings.py* and *mydb.py* files to change the user and
-   password if they're not the same as mine
 
-7) Add and edit *.env* file: touch .env
+5) cd into project file: cd fall3340-app
+
+
+6) Add and edit *.env* file: touch .env
 
    - copy and paste the provided secret key into .env (may have to use an IDE like PyCharm, Sublime Text, etc.)
 
    ** also don't forget to update the user/password or any other variable to be accurate to your local MySQL server credentials
 
-9) create database in local mysql server (if you don't already have one created): python mydb.py
+
+7) create database in local mysql server (if you don't already have one created): python mydb.py
 
    ** if you get an error here you probably already have a database by that name
 
-10) create superuser: python manage.py createsuperuser
+
+8) create superuser: python manage.py createsuperuser
 
    	** for macOS users ONLY:
    	- Go into *\_\_init\_\_.py* in the *todoapp* directory and add these lines into the code:
@@ -46,11 +55,13 @@
    	  
 	  pymysql.install_as_MySQLdb()
 
-11) migrate files: python manage.py makemigrations
+
+9) migrate files: python manage.py makemigrations
 
     followed by: python manage.py migrate
 
-12) run server: python manage.py runserver
+
+10) run server: python manage.py runserver
 
 Access the admin interface at https://localhost:8000/admin
 using the superuser credentials
