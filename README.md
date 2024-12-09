@@ -1,6 +1,6 @@
 # fall3340-app
 
-[Sprint Planning](https://docs.google.com/spreadsheets/d/1Hz4CpsZgNapBO1e3kCuBihgrCgaK8QUm1_SiWbC72BM/edit?usp=sharing), [Technical](https://docs.google.com/document/d/1nES1agJkptSMXrpC6NSjp0JjgR4-98Bw/edit?usp=sharing&ouid=104017763662039089977&rtpof=true&sd=true) and [Design](https://docs.google.com/document/d/1CE0OFN7hN-9xSveZoVv2XKhH0Nn95g6IaNZLZCo5D00/edit?usp=sharing) Documentation
+[Sprint Planning](https://docs.google.com/spreadsheets/d/1Hz4CpsZgNapBO1e3kCuBihgrCgaK8QUm1_SiWbC72BM/edit?usp=sharing), [Technical](https://docs.google.com/document/d/1nES1agJkptSMXrpC6NSjp0JjgR4-98Bw/edit?usp=sharing&ouid=104017763662039089977&rtpof=true&sd=true) / [Design](https://docs.google.com/document/d/1CE0OFN7hN-9xSveZoVv2XKhH0Nn95g6IaNZLZCo5D00/edit?usp=sharing) Documentation and [Final Presentation](https://docs.google.com/presentation/d/1G9gBwKOCn-0OvIgUI4D4BL-A9ym00qCLGetHvBwYYNc/edit#slide=id.p) Slides
 
 ## Setup Instructions
 
