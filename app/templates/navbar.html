@@ -15,16 +15,20 @@
           <div class="d-flex bd-h-32" style="color: white">
             <div class="vr border-4 opacity-75"></div>
           </div>
-          <li class="nav-item">
-            <a class="nav-link" style="font-size: 18px; color: white;" href="{% url 'about' %}">About</a>
-          </li>
+          
           {% else %}
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: 18px; color: white;" aria-current="page" href="{% url 'dashboard' %}">My Tasks</a>
+          </li>
           <!--
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
           </li>
           -->
           {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: 18px; color: white;" href="{% url 'about' %}">About</a>
+          </li>
         </ul>
         <div class="collapse navbar-collapse" id="navbarNav"></div>
           <ul class="nav justify-content-end">
@@ -35,6 +39,9 @@
               -->
               {% else %}
               <a class="nav-link" style="font-size: 18px; color: white" href="{% url 'logout' %}">Logout</a>
+              <li>
+                <a class="nav-link" style="font-size: 18px; color: white" href="{% url 'profile' %}">Profile</a>
+              </li>
               {% endif %}
             </li>
           </ul>
